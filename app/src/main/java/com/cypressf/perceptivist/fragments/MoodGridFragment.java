@@ -18,6 +18,7 @@ import com.cypressf.perceptivist.models.Mood;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MoodGridFragment extends Fragment {
     @Bind(R.id.grid_view)
@@ -63,5 +64,10 @@ public class MoodGridFragment extends Fragment {
         });
 
         return layout;
+    }
+
+    @OnClick(R.id.button)
+    public void onMoodSubmitted() {
+
     }
 }
