@@ -2,12 +2,21 @@
 <manifest package="com.cypressf.perceptivist"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="oEWmUFwuoaW8LAdldgXzhy0C3ZOvrGIMKafeSC2J" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="hjdr10cvZfEyWLVnhtOCzt4cjKMqHK7WJI7kiCm3" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
