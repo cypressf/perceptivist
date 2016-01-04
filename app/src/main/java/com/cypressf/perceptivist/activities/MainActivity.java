@@ -1,7 +1,9 @@
-package com.cypressf.perceptivist;
+package com.cypressf.perceptivist.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.cypressf.perceptivist.R;
 
 public class MainActivity extends AppCompatActivity {
 

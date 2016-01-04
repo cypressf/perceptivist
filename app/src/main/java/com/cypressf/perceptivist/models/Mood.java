@@ -9,7 +9,7 @@ import android.graphics.Color;
  * Energy is a ranking of the emotions energy from 1 (very passive) to 10 (very active).
  */
 public class Mood {
-    private static Mood[][] moods;
+
     private static final String[] NAMES = new String[] {
         "enraged",
         "panicked",
@@ -214,22 +214,12 @@ public class Mood {
         "Feeling comfortable, warm and pleasant",
         "Calm and peaceful; untroubled"
     };
-
+    private static Mood[] moods;
     private int pleasantness;
     private int energy;
     private String name;
     private String description;
-
-    public static Mood[][] getMoods() {
-        if (moods == null) {
-            moods = new Mood[10][10];
-            for (int i = 0; i < NAMES.length; i++) {
-                moods[i % 10][10 - (i / 10)] = new Mood(NAMES[i], DESCRIPTIONS[i], i % 10, 10 - (i / 10));
-            }
-        }
-        return moods;
-    }
-
+    private Category category;
     /**
      * The constructor is private because we only use a list of predefined emotions.
      */
@@ -240,8 +230,56 @@ public class Mood {
         this.energy = energy;
     }
 
+    public static Mood[] getMoods() {
+        if (moods == null) {
+            moods = new Mood[100];
+            for (int i = 0; i < NAMES.length; i++) {
+                int energy = 9 - (i / 10);
+                int pleasantness = i % 10;
+                moods[i] = new Mood(NAMES[i], DESCRIPTIONS[i], pleasantness, energy);
+            }
+        }
+        return moods;
+    }
+
     public int getColor() {
-        // TODO
-        return Color.GRAY;
+        return getCategory().color;
+    }
+
+    public Category getCategory() {
+        if (category != null) {
+            return category;
+        }
+        if (energy >= 5) {
+            if (pleasantness >= 5) {
+                category = Category.HAPPY;
+            } else {
+                category = Category.MAD;
+            }
+        } else {
+            if (pleasantness >= 5) {
+                category = Category.CALM;
+            } else {
+                category = Category.SAD;
+            }
+        }
+        return category;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d,%d", energy, pleasantness);
+    }
+
+    public enum Category {
+        MAD (Color.RED),
+        SAD (Color.BLUE),
+        CALM (Color.GREEN),
+        HAPPY (Color.YELLOW);
+        private final int color;
+
+        Category(int color) {
+            this.color = color;
+        }
     }
 }
