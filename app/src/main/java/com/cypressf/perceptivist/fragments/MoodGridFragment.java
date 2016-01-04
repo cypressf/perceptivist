@@ -7,9 +7,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cypressf.perceptivist.R;
 import com.cypressf.perceptivist.models.Mood;
@@ -20,6 +22,10 @@ import butterknife.ButterKnife;
 public class MoodGridFragment extends Fragment {
     @Bind(R.id.grid_view)
     GridView moodGrid;
+    @Bind(R.id.mood_description_text)
+    TextView moodDescriptionTextView;
+    @Bind(R.id.mood_name_text)
+    TextView moodNameTextView;
 
     @Nullable
     @Override
@@ -47,6 +53,15 @@ public class MoodGridFragment extends Fragment {
             }
         };
         moodGrid.setAdapter(adapter);
+        moodGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Mood mood = (Mood) moodGrid.getItemAtPosition(position);
+                moodNameTextView.setText(mood.getName());
+                moodDescriptionTextView.setText(mood.getDescription());
+            }
+        });
+
         return layout;
     }
 }

@@ -271,6 +271,14 @@ public class Mood {
         return String.format("%d,%d", energy, pleasantness);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public enum Category {
         MAD (Color.RED),
         SAD (Color.BLUE),
